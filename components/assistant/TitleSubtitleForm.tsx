@@ -8,6 +8,7 @@ import TextArea from "@/components/ui/TextArea";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import CopyButton from "@/components/ui/CopyButton";
 import CharCounter from "@/components/assistant/CharCounter";
+import ClearIcon from "@/components/icons/ClearIcon";
 import type { TitleSubtitleResponse } from "@/types/aso";
 
 export default function TitleSubtitleForm() {
@@ -17,6 +18,10 @@ export default function TitleSubtitleForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<TitleSubtitleResponse | null>(null);
+
+  const hasInput = [appName, description, priorityKeywords].some(
+    (value) => value.trim().length > 0
+  );
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -41,6 +46,14 @@ export default function TitleSubtitleForm() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleClear() {
+    setAppName("");
+    setDescription("");
+    setPriorityKeywords("");
+    setError(null);
+    setResult(null);
   }
 
   return (
@@ -68,26 +81,39 @@ export default function TitleSubtitleForm() {
           value={priorityKeywords}
           onChange={(e) => setPriorityKeywords(e.target.value)}
         />
-        <Button type="submit" disabled={loading} className="mt-2 self-start">
-          {loading && <LoadingSpinner />}
-          {loading ? "Generating…" : "Generate Options"}
-        </Button>
+        <div className="mt-2 flex gap-2">
+          <Button type="submit" disabled={loading}>
+            {loading && <LoadingSpinner />}
+            {loading ? "Generating…" : "Generate Options"}
+          </Button>
+          {hasInput && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleClear}
+              disabled={loading}
+            >
+              Clear input
+              <ClearIcon />
+            </Button>
+          )}
+        </div>
       </form>
 
       <div className="flex flex-col gap-4">
         {error && (
-          <Card className="border-red-200 bg-red-50 text-sm text-red-700">
+          <Card className="border-red-200 bg-red-50 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
             {error}
           </Card>
         )}
         {result?.options.map((option, i) => (
           <Card key={i} className="flex flex-col gap-4">
-            <div className="rounded-lg border border-zinc-200 p-3">
-              <p className="text-xs text-zinc-400">App Store preview</p>
-              <p className="mt-1 truncate text-sm font-semibold text-zinc-900">
+            <div className="rounded-lg border border-zinc-200 p-3 dark:border-zinc-700">
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">App Store preview</p>
+              <p className="mt-1 truncate text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                 {option.title}
               </p>
-              <p className="truncate text-xs text-zinc-500">
+              <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">
                 {option.subtitle}
               </p>
             </div>
@@ -95,12 +121,12 @@ export default function TitleSubtitleForm() {
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-zinc-500">
+                  <span className="text-xs font-medium text-zinc-500 dark:text-zinc-500">
                     Title
                   </span>
                   <CharCounter current={option.title.length} max={30} />
                 </div>
-                <p className="mt-0.5 truncate text-sm text-zinc-900">
+                <p className="mt-0.5 truncate text-sm text-zinc-900 dark:text-zinc-100">
                   {option.title}
                 </p>
               </div>
@@ -110,12 +136,12 @@ export default function TitleSubtitleForm() {
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-zinc-500">
+                  <span className="text-xs font-medium text-zinc-500 dark:text-zinc-500">
                     Subtitle
                   </span>
                   <CharCounter current={option.subtitle.length} max={30} />
                 </div>
-                <p className="mt-0.5 truncate text-sm text-zinc-900">
+                <p className="mt-0.5 truncate text-sm text-zinc-900 dark:text-zinc-100">
                   {option.subtitle}
                 </p>
               </div>
@@ -124,7 +150,7 @@ export default function TitleSubtitleForm() {
           </Card>
         ))}
         {!error && !result && (
-          <Card className="text-sm text-zinc-500">
+          <Card className="text-sm text-zinc-500 dark:text-zinc-500">
             Fill in your app details and generate a few title/subtitle
             options, each within Apple&apos;s 30-character limits.
           </Card>

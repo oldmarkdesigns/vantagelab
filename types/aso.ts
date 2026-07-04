@@ -49,6 +49,7 @@ export interface CritiqueFinding {
   category: CritiqueCategory;
   field: string;
   detail: string;
+  suggestion: string;
 }
 
 export interface MetadataCritiqueResponse {

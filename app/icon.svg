@@ -1,0 +1,16 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M4 25C9.5 25 10.5 12 16 12C20 12 20.5 19 24.5 19C27 19 27.5 9 28 7"
+    stroke="url(#vantage-icon-gradient)"
+    stroke-width="2.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="28" cy="7" r="2.5" fill="url(#vantage-icon-gradient)" />
+  <defs>
+    <linearGradient id="vantage-icon-gradient" x1="4" y1="25" x2="28" y2="7" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a5b4fc" />
+      <stop offset="1" stop-color="#4f46e5" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -16,17 +16,17 @@ export default function GuidePage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-12">
       <div className="mb-10">
-        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900">
+        <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
           The ASO Guide
         </h1>
-        <p className="mt-2 max-w-2xl text-zinc-600">
+        <p className="mt-2 max-w-2xl text-zinc-600 dark:text-zinc-400">
           The fundamentals of iOS App Store Search Optimization — what
           actually moves your ranking, and what wastes your character
           budget.
         </p>
       </div>
 
-      <div className="flex gap-12">
+      <div className="flex items-start gap-12">
         <GuideSidebar items={sections} />
 
         <div className="min-w-0 flex-1">

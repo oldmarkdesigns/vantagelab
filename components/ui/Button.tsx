@@ -10,7 +10,7 @@ const base =
 const variants = {
   primary: "bg-indigo-600 text-white hover:bg-indigo-500",
   secondary:
-    "bg-white text-zinc-900 border border-zinc-300 hover:bg-zinc-50",
+    "bg-white text-zinc-900 border border-zinc-300 hover:bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800",
 };
 
 export default function Button({

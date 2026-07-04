@@ -31,7 +31,7 @@ export default function AssistantTabs() {
 
   return (
     <div>
-      <div className="flex gap-1 overflow-x-auto border-b border-zinc-200">
+      <div className="flex gap-1 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800">
         {TABS.map((tab) => (
           <button
             key={tab.id}
@@ -39,8 +39,8 @@ export default function AssistantTabs() {
             onClick={() => setTab(tab.id)}
             className={`whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
               activeTab === tab.id
-                ? "border-indigo-600 text-indigo-700"
-                : "border-transparent text-zinc-500 hover:text-zinc-900"
+                ? "border-indigo-600 text-indigo-700 dark:border-indigo-400 dark:text-indigo-400"
+                : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100"
             }`}
           >
             {tab.label}
@@ -48,10 +48,18 @@ export default function AssistantTabs() {
         ))}
       </div>
 
+      {/* Every tab's form stays mounted (hidden via CSS, not unmounted) so
+          each tool's inputs and results survive switching between tabs. */}
       <div className="mt-8">
-        {activeTab === "keyword-optimizer" && <KeywordOptimizerForm />}
-        {activeTab === "title-subtitle" && <TitleSubtitleForm />}
-        {activeTab === "metadata-critique" && <MetadataCritiqueForm />}
+        <div className={activeTab === "keyword-optimizer" ? "" : "hidden"}>
+          <KeywordOptimizerForm />
+        </div>
+        <div className={activeTab === "title-subtitle" ? "" : "hidden"}>
+          <TitleSubtitleForm />
+        </div>
+        <div className={activeTab === "metadata-critique" ? "" : "hidden"}>
+          <MetadataCritiqueForm />
+        </div>
       </div>
     </div>
   );

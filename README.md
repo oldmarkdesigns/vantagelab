@@ -1,4 +1,4 @@
-# ASO Tool
+# Vantage
 
 A simple, focused App Store Search Optimization (ASO) toolkit for iOS app developers — a written guide plus an AI assistant for keyword and metadata work.
 

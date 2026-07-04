@@ -8,6 +8,7 @@ import TextArea from "@/components/ui/TextArea";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import CopyButton from "@/components/ui/CopyButton";
 import CharCounter from "@/components/assistant/CharCounter";
+import ClearIcon from "@/components/icons/ClearIcon";
 import type { KeywordOptimizerResponse } from "@/types/aso";
 
 export default function KeywordOptimizerForm() {
@@ -18,6 +19,10 @@ export default function KeywordOptimizerForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<KeywordOptimizerResponse | null>(null);
+
+  const hasInput = [appName, description, title, subtitle].some(
+    (value) => value.trim().length > 0
+  );
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -42,6 +47,15 @@ export default function KeywordOptimizerForm() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleClear() {
+    setAppName("");
+    setDescription("");
+    setTitle("");
+    setSubtitle("");
+    setError(null);
+    setResult(null);
   }
 
   return (
@@ -76,32 +90,45 @@ export default function KeywordOptimizerForm() {
           value={subtitle}
           onChange={(e) => setSubtitle(e.target.value)}
         />
-        <Button type="submit" disabled={loading} className="mt-2 self-start">
-          {loading && <LoadingSpinner />}
-          {loading ? "Optimizing…" : "Optimize Keywords"}
-        </Button>
+        <div className="mt-2 flex gap-2">
+          <Button type="submit" disabled={loading}>
+            {loading && <LoadingSpinner />}
+            {loading ? "Optimizing…" : "Optimize Keywords"}
+          </Button>
+          {hasInput && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleClear}
+              disabled={loading}
+            >
+              Clear input
+              <ClearIcon />
+            </Button>
+          )}
+        </div>
       </form>
 
       <div>
         {error && (
-          <Card className="border-red-200 bg-red-50 text-sm text-red-700">
+          <Card className="border-red-200 bg-red-50 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
             {error}
           </Card>
         )}
         {result && (
           <Card className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-zinc-900">
+              <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                 Keyword field
               </h3>
               <CharCounter current={result.charCount} max={100} />
             </div>
-            <p className="rounded-lg bg-zinc-50 p-3 font-mono text-sm text-zinc-900">
+            <p className="break-all rounded-lg bg-zinc-50 p-3 font-mono text-sm text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
               {result.keywordString}
             </p>
             <CopyButton value={result.keywordString} />
             {result.excludedDuplicates.length > 0 && (
-              <div className="border-t border-zinc-200 pt-3 text-xs text-zinc-500">
+              <div className="border-t border-zinc-200 pt-3 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
                 Excluded as duplicates of title/subtitle:{" "}
                 {result.excludedDuplicates.join(", ")}
               </div>
@@ -109,7 +136,7 @@ export default function KeywordOptimizerForm() {
           </Card>
         )}
         {!error && !result && (
-          <Card className="text-sm text-zinc-500">
+          <Card className="text-sm text-zinc-500 dark:text-zinc-500">
             Fill in your app details and generate a keyword field optimized
             for Apple&apos;s 100-character limit.
           </Card>

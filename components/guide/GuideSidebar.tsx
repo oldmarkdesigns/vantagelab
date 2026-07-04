@@ -32,16 +32,16 @@ export default function GuideSidebar({ items }: { items: GuideNavItem[] }) {
   }, [items]);
 
   return (
-    <nav className="sticky top-24 hidden w-56 shrink-0 lg:block">
-      <ul className="space-y-1 border-l border-zinc-200 pl-4 text-sm">
+    <nav className="sticky top-28 hidden w-56 shrink-0 lg:block">
+      <ul className="space-y-1 border-l border-zinc-200 pl-4 text-sm dark:border-zinc-800">
         {items.map((item) => (
           <li key={item.id}>
             <a
               href={`#${item.id}`}
               className={`block py-1 transition-colors ${
                 activeId === item.id
-                  ? "font-medium text-indigo-600"
-                  : "text-zinc-500 hover:text-zinc-900"
+                  ? "font-medium text-indigo-600 dark:text-indigo-400"
+                  : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100"
               }`}
             >
               {item.label}

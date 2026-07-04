@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
     const message = await client.messages.parse({
       model: CLAUDE_MODEL,
       max_tokens: 2048,
+      thinking: { type: "disabled" },
       system: SYSTEM_PROMPT,
       messages: [
         { role: "user", content: buildMetadataCritiquePrompt(body) },

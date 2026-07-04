@@ -10,9 +10,9 @@ export default function GuideSection({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 border-b border-zinc-200 py-10 first:pt-0 last:border-b-0">
-      <h2 className="text-xl font-semibold text-zinc-900">{title}</h2>
-      <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-700">
+    <section id={id} className="scroll-mt-28 border-b border-zinc-200 py-10 first:pt-0 last:border-b-0 dark:border-zinc-800">
+      <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">{title}</h2>
+      <div className="mt-3 space-y-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
         {children}
       </div>
     </section>

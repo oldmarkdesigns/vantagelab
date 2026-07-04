@@ -18,6 +18,11 @@ export const metadataCritiqueSchema = z.object({
         detail: z
           .string()
           .describe("One-sentence explanation of the finding."),
+        suggestion: z
+          .string()
+          .describe(
+            "A concrete, ready-to-use fix: the exact replacement word/phrase, or the exact term to add or remove — not general advice."
+          ),
       })
     )
     .describe("All findings from the critique, most important first."),
@@ -35,6 +40,7 @@ Look for exactly these categories:
 
 Rules:
 - Every finding must be concrete and specific — name the actual word/phrase, don't speak in generalities.
+- Every finding must include a ready-to-use suggestion, not just a description of the problem. Give the exact fix: the specific replacement word/phrase, the exact term to remove, or the exact keyword to add. Never write vague advice like "consider adding more relevant keywords" — name the keyword. For "opportunity" findings, the suggestion is the specific term(s) to add and, if relevant, where. For "stuffing", say which term(s) to drop and which to keep. For "duplicate", say which occurrence to remove. For "low_intent", give the specific replacement term.
 - Only report real issues. If a field is already well-optimized, it is fine to return fewer findings for it.
 - Order findings by importance (most damaging/highest-value first).`;
 
