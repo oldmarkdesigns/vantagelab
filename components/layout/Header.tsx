@@ -9,7 +9,6 @@ import Logo from "@/components/icons/Logo";
 const links = [
   { href: "/", label: "Home" },
   { href: "/guide", label: "Guide" },
-  { href: "/assistant", label: "Assistant" },
   { href: "/pricing", label: "Pricing" },
 ];
 
@@ -20,15 +19,15 @@ export default function Header() {
   return (
     <div className="sticky top-4 z-50 px-4">
       <header className="mx-auto max-w-3xl rounded-3xl border border-zinc-200 bg-white/90 text-zinc-900 shadow-lg shadow-zinc-900/5 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-zinc-100 dark:shadow-black/20 sm:rounded-full">
-        <div className="flex items-center justify-between gap-4 px-4 py-2.5">
-          <Link href="/" className="flex shrink-0 items-center gap-2.5">
-            <Logo className="h-9 w-9" />
-            <span className="text-sm font-semibold tracking-tight">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 py-2.5">
+          <Link href="/" className="flex shrink-0 items-center gap-2">
+            <Logo className="h-7 w-7" />
+            <span className="font-[family-name:var(--font-space-grotesk)] bg-gradient-to-r from-indigo-400 to-indigo-600 bg-clip-text text-base font-bold tracking-tight text-transparent dark:from-indigo-300 dark:to-indigo-500">
               Vantage
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 sm:flex">
+          <nav className="hidden items-center justify-center gap-1 sm:flex">
             {links.map((link) => {
               const active =
                 link.href === "/"
@@ -50,7 +49,7 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-1">
+          <div className="flex shrink-0 items-center justify-end gap-1">
             <ThemeToggle />
             <div className="mx-1 hidden h-5 w-px bg-zinc-200 dark:bg-zinc-700 sm:block" />
             <Link
@@ -66,7 +65,7 @@ export default function Header() {
                   strokeLinejoin="round"
                 />
               </svg>
-              Try it
+              Optimize
             </Link>
 
             <button

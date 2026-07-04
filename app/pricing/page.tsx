@@ -10,6 +10,7 @@ interface Tier {
   features: string[];
   cta: { label: string; href?: string; disabled?: boolean };
   highlighted?: boolean;
+  comingSoon?: boolean;
 }
 
 const tiers: Tier[] = [
@@ -27,7 +28,7 @@ const tiers: Tier[] = [
   },
   {
     name: "Pro",
-    price: "$12",
+    price: "$6",
     cadence: "/ month",
     description: "For developers actively shipping ASO updates.",
     features: [
@@ -51,6 +52,7 @@ const tiers: Tier[] = [
       "Priority support",
     ],
     cta: { label: "Coming soon", disabled: true },
+    comingSoon: true,
   },
 ];
 
@@ -71,7 +73,7 @@ export default function PricingPage() {
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className={`flex flex-col ${
+            className={`relative flex flex-col overflow-hidden ${
               tier.highlighted
                 ? "border-indigo-300 ring-1 ring-indigo-200 dark:border-indigo-500 dark:ring-indigo-500/30"
                 : ""
@@ -82,57 +84,72 @@ export default function PricingPage() {
                 Most popular
               </span>
             )}
+            {tier.comingSoon && (
+              <span className="mb-3 inline-block w-fit rounded-full bg-zinc-200 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                Coming soon
+              </span>
+            )}
             <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
               {tier.name}
             </h2>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              {tier.description}
-            </p>
-            <div className="mt-4 flex items-baseline gap-1">
-              <span className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
-                {tier.price}
-              </span>
-              <span className="text-sm text-zinc-500 dark:text-zinc-500">
-                {tier.cadence}
-              </span>
-            </div>
 
-            <ul className="mt-6 flex-1 space-y-2.5 text-sm text-zinc-700 dark:text-zinc-300">
-              {tier.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
-                  >
-                    <path
-                      d="M4 10l4 4 8-8"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <div
+              className={
+                tier.comingSoon
+                  ? "pointer-events-none flex flex-1 flex-col select-none blur-sm"
+                  : "flex flex-1 flex-col"
+              }
+              aria-hidden={tier.comingSoon || undefined}
+            >
+              <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                {tier.description}
+              </p>
+              <div className="mt-4 flex items-baseline gap-1">
+                <span className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
+                  {tier.price}
+                </span>
+                <span className="text-sm text-zinc-500 dark:text-zinc-500">
+                  {tier.cadence}
+                </span>
+              </div>
 
-            {tier.cta.href ? (
-              <Link href={tier.cta.href} className="mt-6">
-                <Button variant={tier.highlighted ? "primary" : "secondary"} className="w-full">
+              <ul className="mt-6 flex-1 space-y-2.5 text-sm text-zinc-700 dark:text-zinc-300">
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2">
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                    >
+                      <path
+                        d="M4 10l4 4 8-8"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              {tier.cta.href ? (
+                <Link href={tier.cta.href} className="mt-6">
+                  <Button variant={tier.highlighted ? "primary" : "secondary"} className="w-full">
+                    {tier.cta.label}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  variant={tier.highlighted ? "primary" : "secondary"}
+                  className="mt-6 w-full"
+                  disabled={tier.cta.disabled}
+                >
                   {tier.cta.label}
                 </Button>
-              </Link>
-            ) : (
-              <Button
-                variant={tier.highlighted ? "primary" : "secondary"}
-                className="mt-6 w-full"
-                disabled={tier.cta.disabled}
-              >
-                {tier.cta.label}
-              </Button>
-            )}
+              )}
+            </div>
           </Card>
         ))}
       </div>

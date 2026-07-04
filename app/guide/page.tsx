@@ -179,6 +179,65 @@ export default function GuidePage() {
               </li>
             </ul>
           </GuideSection>
+
+          <GuideSection id="apple-resources" title="Apple's Official Resources">
+            <p>
+              This guide covers the practical fundamentals, but Apple
+              publishes its own documentation on search, product pages, and
+              review policy — worth reading directly for anything
+              guideline-sensitive or subject to change.
+            </p>
+            <ul className="list-disc space-y-1 pl-5">
+              <li>
+                <a
+                  href="https://developer.apple.com/app-store/search/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                >
+                  App Store Search
+                </a>{" "}
+                — Apple&apos;s own overview of how search ranking works and
+                how to write effective metadata.
+              </li>
+              <li>
+                <a
+                  href="https://developer.apple.com/app-store/product-page/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                >
+                  App Store Product Page
+                </a>{" "}
+                — guidelines for icons, screenshots, previews, and the rest
+                of your listing.
+              </li>
+              <li>
+                <a
+                  href="https://developer.apple.com/app-store/review/guidelines/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                >
+                  App Store Review Guidelines
+                </a>{" "}
+                — the rules your app and its metadata must follow to be
+                approved.
+              </li>
+              <li>
+                <a
+                  href="https://help.apple.com/app-store-connect/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-indigo-600 hover:underline dark:text-indigo-400"
+                >
+                  App Store Connect Help
+                </a>{" "}
+                — reference docs for where to actually edit each metadata
+                field covered in this guide.
+              </li>
+            </ul>
+          </GuideSection>
         </div>
       </div>
     </div>
